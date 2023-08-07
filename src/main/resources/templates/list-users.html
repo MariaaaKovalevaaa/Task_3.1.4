@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+
+<h3>Пользователи</h3>
+<table>
+
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Пароль</th>
+        <th>Роль</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.getUsername()}"/>
+        <td th:text="${user.getPassword()}"/>
+        <td th:text="${user.getRoles()}"/>
+
+
+        <td>
+            <form th:method="GET" th:action="@{/admin/edit/{id}(id=${user.id})}">
+                <input type="submit" value="Редактировать"/>
+            </form>
+        </td>
+
+        <td>
+            <form th:method="DELETE" th:action="@{/admin/delete/{id} (id=${user.id})}">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <input type="submit" value="Удалить"/>
+            </form>
+        </td>
+
+
+
+    </tr>
+
+    <td>
+        <form th:method="GET" th:action="@{/admin/new}">
+            <input type="submit" value="Создать нового пользователя"/>
+        </form>
+    </td>
+
+
+    <td>
+        <form th:method="POST" th:action="@{/logout}">
+            <input type="submit" value="Выйти из системы"/>
+        </form>
+    </td>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>
