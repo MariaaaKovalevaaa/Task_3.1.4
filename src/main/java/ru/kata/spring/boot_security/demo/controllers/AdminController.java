@@ -27,7 +27,7 @@ public class AdminController {
     @GetMapping()
     public String showAllUsers(Model model) {
         model.addAttribute("users", userService.findAll());//это пара ключ-значение. Ключ "users" будет во вьюшке list-users
-        return "list-users";
+        return "admin-page";
     }
 
     @GetMapping("/user-profile/{id}")
@@ -35,7 +35,7 @@ public class AdminController {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
         model.addAttribute("userRoles", user.getRoles());
-        return "/user-profile";
+        return "user-page";
     }
 
     /**
@@ -49,7 +49,7 @@ public class AdminController {
     public String editUser(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.findUserById(id));
         model.addAttribute("userRoles", roleService.findAll());
-        return "/edit";
+        return "edit-user";
     }
 
     /**
@@ -85,7 +85,7 @@ public class AdminController {
     @GetMapping("/new")
     public String form_for_create_user(Model model, User user) {
         model.addAttribute("user", new User());
-        return "/form_for_create_user";
+        return "add-new-user";
     }
 
     /**

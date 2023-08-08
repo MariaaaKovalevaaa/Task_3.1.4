@@ -25,6 +25,6 @@ public class UserController {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("userRoles", user.getAuthorities());
-        return "/user-profile";
+        return "user-page";
     }
 }

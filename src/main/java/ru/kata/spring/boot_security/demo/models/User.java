@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.*;
 
 /**
@@ -21,9 +22,18 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username") //Имя юзера должно быть уникальным
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "lastname")
+    private String lastname;
+
+    @Column(name = "age")
+    private Byte age;
+
+    @Email
+    @Column(name = "email")
+    private String email;
     @Column(name = "password")
     private String password;
 
@@ -63,6 +73,32 @@ public class User implements UserDetails {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public Byte getAge() {
+        return age;
+    }
+
+    public void setAge(Byte age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
