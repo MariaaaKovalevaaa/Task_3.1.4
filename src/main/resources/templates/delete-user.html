@@ -5,15 +5,19 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!--Строку ниже пишем, потому что viewport нужен, чтобы работали адаптивные версии на всех мобильных устройствах-->
+
+  <!--width=device-width - это, чтобы работали адаптивные версии на всех мобильных устройствах, т.е. ширина по девайсу-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--  Это ссылка на CSS
-атрибут rel (от англ. «relationship» – отношение) – это атрибут HTML, описывающий ссылку, т.е. тег href-->
+  <!--  Подключаем стили (CSS) Бутстрапа
+rel (от relationship) – это атрибут, описывающий тег href-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
         crossorigin="anonymous">
+
+  <!--    Иконка сайта-->
   <link rel="icon" href="https://img.freepik.com/free-icon/leaf_318-654663.jpg">
+
   <title>Admin panel</title>
 
 </head>
@@ -21,10 +25,8 @@
 <body>
 
 
-<!--Это ссылка на пакет JavaScript, включая Popper для позиционирования раскрывающихся списков,
-всплывающие сообщения и всплывающие подсказки. Размещается перед закрывающим тегом </body>
-bundle означает, что единым файлом подключается и Popper и JavaScript
-Этой ссылкой мы подключили бутстрап-->
+<!--Подключаем JavaScript бутстрапа, включая Popper для позиционирования раскрывающихся списков,
+всплывающие сообщения и всплывающие подсказки. Размещается перед закрывающим тегом </body>-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>

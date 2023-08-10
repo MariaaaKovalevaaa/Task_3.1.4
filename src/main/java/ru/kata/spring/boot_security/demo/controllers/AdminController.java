@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -25,8 +27,14 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String showAllUsers(Model model) {
-        model.addAttribute("users", userService.findAll());//это пара ключ-значение. Ключ "users" будет во вьюшке list-users
+    public String showAllUsers(@ModelAttribute ("user") User user, Principal principal, Model model) {
+        User authenticatedUser = userService.findByUsername(principal.getName()); //Нашли в БД юзера, который аутентифицировался
+
+        //Добавляем в модель данные, чтобы отправить их на вьюшку admin-page
+        model.addAttribute ("authenticatedUser", authenticatedUser); //Добавили самого юзера из БД
+        model.addAttribute ("roleOfAuthenticatedUser", authenticatedUser.getRoles()); //Добавили его роли
+        model.addAttribute("users", userService.findAll());// Добавили всех юзеров из БД
+        model.addAttribute( "AllRoles", roleService.findAll()); //Добавили все роли из БД
         return "admin-page";
     }
 
