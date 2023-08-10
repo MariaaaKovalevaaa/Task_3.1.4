@@ -23,30 +23,61 @@
 <body>
 
 <form method="POST" th:action="@{/logout}" th:object="${user}">
+    <!--Это под id #v-pills-user", который раскрывается, когда нажимаешь button "New user"-->
+    <!--USER-->
+    <div class="tab-pane fade" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+        <table class="table table-striped table-responsive caption-top">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+            </thead>
 
-    <div class="main block">
+            <tbody>
+            <tr th:each="user: ${users}">
+                <td th:text="${user.getId()}"/>
+                <td th:text="${user.getUsername()}"/>
+                <td th:text="${user.getLastname()}"/>
+                <td th:text="${user.getAge()}"/>
+                <td th:text="${user.getEmail()}"/>
 
-        <h3>Страница пользователя</h3>
+                <td>
+                <span th:each="role : ${user.getRoles()}"
+                      th:text="${role.getRole().replace('ROLE_', '') + ' '}">
+                </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<!--    <div class="main block">-->
 
-        <div class="field">
-            <label for="username">Имя</label>
-            <input type="username" th:field="*{username}" id="username"/>
-        </div>
+<!--        <h3>Страница пользователя</h3>-->
 
-        <div>
-            <label>Роли:
-                <input type="checkbox" name="roles"
-                       th:each="role: ${userRoles}"
-                       th:text="${role.getRole()}"
-                       th:value="${role.getId()}"
-                       th:field="*{roles}"/>
-            </label>
-        </div>
+<!--        <div class="field">-->
+<!--            <label for="username">Имя</label>-->
+<!--            <input type="username" th:field="*{username}" id="username"/>-->
+<!--        </div>-->
 
-        <br>
-        <form th:method="POST" th:action="@{/logout}">
-            <input type="submit" value="Выйти из системы"/>
-        </form>
+<!--        <div>-->
+<!--            <label>Роли:-->
+<!--                <input type="checkbox" name="roles"-->
+<!--                       th:each="role: ${userRoles}"-->
+<!--                       th:text="${role.getRole()}"-->
+<!--                       th:value="${role.getId()}"-->
+<!--                       th:field="*{roles}"/>-->
+<!--            </label>-->
+<!--        </div>-->
+
+<!--        <br>-->
+<!--        <form th:method="POST" th:action="@{/logout}">-->
+<!--            <input type="submit" value="Выйти из системы"/>-->
+<!--        </form>-->
 
     </div>
 </form>
