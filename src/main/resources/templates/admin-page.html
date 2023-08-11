@@ -426,13 +426,13 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td th:text="${user.getId()}"/>
-                        <td th:text="${user.getUsername()}"/>
-                        <td th:text="${user.getLastname()}"/>
-                        <td th:text="${user.getAge()}"/>
-                        <td th:text="${user.getEmail()}"/>
+                        <td th:text="${authenticatedUser.getId()}"/>
+                        <td th:text="${authenticatedUser.getUsername()}"/>
+                        <td th:text="${authenticatedUser.getLastname()}"/>
+                        <td th:text="${authenticatedUser.getAge()}"/>
+                        <td th:text="${authenticatedUser.getEmail()}"/>
                         <td>
-                                        <span th:each="role : ${user.getRoles()}" th:switch="${role.getRole()}">
+                                        <span th:each="role : ${authenticatedUser.getRoles()}" th:switch="${role.getRole()}">
                                                 <span th:case="'ROLE_ADMIN'">ADMIN</span>
                                                 <span th:case="'ROLE_USER'">USER</span>
                                         </span>
