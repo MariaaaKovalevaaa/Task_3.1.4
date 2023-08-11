@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -93,6 +95,8 @@ public class AdminController {
     @GetMapping("/new")
     public String form_for_create_user(Model model, User user) {
         model.addAttribute("user", new User());
+        List<Role> roles = (List<Role>) roleService.findAll();
+        model.addAttribute("allRoles", roles);
         return "add-new-user";
     }
 
