@@ -19,6 +19,7 @@
     <link rel="icon" href="https://img.freepik.com/free-icon/leaf_318-654663.jpg">
 
     <title>Admin panel</title>
+
 </head>
 
 <body>
@@ -51,6 +52,7 @@
 <div class="d-flex align-items-start"> <!--align-items-start - это выравнивание по горизонтали. start - это по верху-->
 
     <div class="col-2">
+
         <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
             <button class="nav-link active" id="v-pills-admin-tab" data-bs-toggle="pill" data-bs-target="#v-pills-admin"
@@ -67,6 +69,7 @@
     <!--СОЗДАЕМ ПАНЕЛЬ-->
     <!--    Это то, что вызывается кнопкой Admin. Оно с id "v-pills-admin" -->
     <div class="container-fluid">
+
         <div class="col-10">
 
             <div class="tab-content" id="v-pills-tabContent">
@@ -117,11 +120,11 @@
 
                                 <tbody>
                                 <tr th:each="user: ${users}">
-                                    <td th:text="${user.getId()}"/>
-                                    <td th:text="${user.getUsername()}"/>
-                                    <td th:text="${user.getLastname()}"/>
-                                    <td th:text="${user.getAge()}"/>
-                                    <td th:text="${user.getEmail()}"/>
+                                    <td th:text="${user.id}"/>
+                                    <td th:text="${user.username}"/>
+                                    <td th:text="${user.lastname}"/>
+                                    <td th:text="${user.age}"/>
+                                    <td th:text="${user.email}"/>
 
                                     <td>
                                     <span th:each="role : ${user.getRoles()}"
@@ -149,18 +152,20 @@
                                          aria-labelledby="EditModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                             <div class="modal-content">
+
+                                                <!-- Заголовок модального окна EDIT -->
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Edit user</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                 </div>
 
-
+                                                <!-- Основное содержимое модального окна EDIT -->
                                                 <div class="modal-body text-center">
                                                     <div class="d-flex justify-content-center align-items-center container">
                                                         <div class="row">
                                                             <form th:method="PATCH"
-                                                                  th:action="@{/admin/update/{id}(id=${user.id})}"
+                                                                  th:action="@{/admin/update/{id} (id=${user.getId()})}"
                                                                   th:object="${user}">
 
                                                                 <div class="mb-3">
@@ -168,8 +173,8 @@
                                                                     <input class="form-control" type="text"
                                                                            id="edit-id"
                                                                            th:value="*{id}"
-                                                                           name="id"
-                                                                           placeholder="Default input">
+                                                                           th:name="id" disabled>
+
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -178,8 +183,8 @@
                                                                     <input class="form-control" type="text"
                                                                            id="edit-firstname"
                                                                            th:value="*{username}"
-                                                                           name="firstname"
-                                                                           placeholder="Default input">
+                                                                           th:name="username" required>
+
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -188,8 +193,7 @@
                                                                     <input class="form-control" type="text"
                                                                            id="edit-lastname"
                                                                            th:value="*{lastname}"
-                                                                           name="lastname"
-                                                                           placeholder="Default input">
+                                                                           th:name="lastname">
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -197,8 +201,7 @@
                                                                     <input class="form-control" type="number"
                                                                            id="edit-age"
                                                                            th:value="*{age}"
-                                                                           name="age"
-                                                                           placeholder="Default input">
+                                                                           th:name="age">
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -206,8 +209,7 @@
                                                                     <input class="form-control" type="text"
                                                                            id="edit-email"
                                                                            th:value="*{email}"
-                                                                           name="email"
-                                                                           placeholder="Default input">
+                                                                           th:name="email">
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -215,14 +217,16 @@
                                                                     <input class="form-control" type="text"
                                                                            id="edit-password"
                                                                            th:value="*{password}"
-                                                                           name="password"
-                                                                           placeholder="Default input">
+                                                                           th:name="password">
                                                                 </div>
 
                                                                 <div class="mb-3">
                                                                     <label><b>Role</b></label>
                                                                     <select class="form-select"
-                                                                            aria-label="Default select example">
+                                                                            aria-label="Default select example"
+                                                                            id="edit-roles"
+                                                                            th:name="roles"
+                                                                            th:value="*{roles}">
                                                                         <option th:each="role : ${AllRoles}"
                                                                                 th:value="${role.getId()}"
                                                                                 th:switch="${role.getRole()}"
@@ -273,8 +277,7 @@
                                                                     <input class="form-control" readonly type="text"
                                                                            id="delete-id"
                                                                            th:value="*{id}"
-                                                                           name="id"
-                                                                           placeholder="Default input" disabled>
+                                                                           name="id" disabled>
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -283,8 +286,7 @@
                                                                     <input class="form-control" readonly type="text"
                                                                            id="delete-firstname"
                                                                            th:value="*{username}"
-                                                                           name="firstname"
-                                                                           placeholder="Default input" disabled>
+                                                                           name="firstname" disabled>
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -293,8 +295,7 @@
                                                                     <input class="form-control" readonly type="text"
                                                                            id="delete-lastname"
                                                                            th:value="*{lastname}"
-                                                                           name="lastname"
-                                                                           placeholder="Default input" disabled>
+                                                                           name="lastname" disabled>
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -303,8 +304,7 @@
                                                                            type="number"
                                                                            id="delete-age"
                                                                            th:value="*{age}"
-                                                                           name="age"
-                                                                           placeholder="Default input" disabled>
+                                                                           name="age" disabled>
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -312,8 +312,7 @@
                                                                     <input class="form-control" readonly type="text"
                                                                            id="delete-email"
                                                                            th:value="*{email}"
-                                                                           name="email"
-                                                                           placeholder="Default input" disabled>
+                                                                           name="email" disabled>
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -321,8 +320,7 @@
                                                                     <input class="form-control" readonly type="text"
                                                                            id="delete-password"
                                                                            th:value="*{password}"
-                                                                           name="password"
-                                                                           placeholder="Default input" disabled>
+                                                                           name="password" disabled>
                                                                 </div>
 
                                                                 <div class="mb-3">
@@ -339,7 +337,6 @@
                                                                         </option>
                                                                     </select>
                                                                 </div>
-
 
                                                                 <div class="modal-footer text-end">
                                                                     <button type="button" class="btn btn-secondary"

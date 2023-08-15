@@ -44,7 +44,7 @@ public class AdminController {
     public String findUser(@PathVariable("id") Long id, Model model) {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
-        model.addAttribute("userRoles", user.getRoles());
+        model.addAttribute("AllRoles", user.getRoles());
         return "user-page";
     }
 
@@ -58,8 +58,8 @@ public class AdminController {
     @GetMapping("/edit/{id}")
     public String editUser(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.findUserById(id));
-        model.addAttribute("userRoles", roleService.findAll());
-        return "edit-user";
+        model.addAttribute("AllRoles", roleService.findAll());
+        return "redirect:/admin";
     }
 
     /**
@@ -96,8 +96,8 @@ public class AdminController {
     public String form_for_create_user(Model model, User user) {
         model.addAttribute("user", new User());
         List<Role> roles = (List<Role>) roleService.findAll();
-        model.addAttribute("allRoles", roles);
-        return "add-new-user";
+        model.addAttribute("AllRoles", roles);
+        return "redirect:/admin";
     }
 
     /**
